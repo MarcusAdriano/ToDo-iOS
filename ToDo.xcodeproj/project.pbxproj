@@ -13,6 +13,7 @@
 		2C13F7592720D7640019AD26 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C13F7582720D7640019AD26 /* Preview Assets.xcassets */; };
 		2C13F75B2720D7640019AD26 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C13F75A2720D7640019AD26 /* Persistence.swift */; };
 		2C13F75E2720D7640019AD26 /* ToDo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C13F75C2720D7640019AD26 /* ToDo.xcdatamodeld */; };
+		2C13F7692720DC250019AD26 /* NewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C13F7682720DC250019AD26 /* NewItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		2C13F7582720D7640019AD26 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2C13F75A2720D7640019AD26 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		2C13F75D2720D7640019AD26 /* ToDo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDo.xcdatamodel; sourceTree = "<group>"; };
+		2C13F7682720DC250019AD26 /* NewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,10 +57,10 @@
 		2C13F7502720D75E0019AD26 /* ToDo */ = {
 			isa = PBXGroup;
 			children = (
+				2C13F7662720DBD40019AD26 /* Store */,
+				2C13F7642720DBAA0019AD26 /* Views */,
 				2C13F7512720D75E0019AD26 /* ToDoApp.swift */,
-				2C13F7532720D75E0019AD26 /* ContentView.swift */,
 				2C13F7552720D7640019AD26 /* Assets.xcassets */,
-				2C13F75A2720D7640019AD26 /* Persistence.swift */,
 				2C13F75C2720D7640019AD26 /* ToDo.xcdatamodeld */,
 				2C13F7572720D7640019AD26 /* Preview Content */,
 			);
@@ -71,6 +73,31 @@
 				2C13F7582720D7640019AD26 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2C13F7642720DBAA0019AD26 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2C13F7672720DC0C0019AD26 /* New Item */,
+				2C13F7532720D75E0019AD26 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2C13F7662720DBD40019AD26 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				2C13F75A2720D7640019AD26 /* Persistence.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+		2C13F7672720DC0C0019AD26 /* New Item */ = {
+			isa = PBXGroup;
+			children = (
+				2C13F7682720DC250019AD26 /* NewItem.swift */,
+			);
+			path = "New Item";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,6 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C13F75B2720D7640019AD26 /* Persistence.swift in Sources */,
+				2C13F7692720DC250019AD26 /* NewItem.swift in Sources */,
 				2C13F7542720D75E0019AD26 /* ContentView.swift in Sources */,
 				2C13F7522720D75E0019AD26 /* ToDoApp.swift in Sources */,
 				2C13F75E2720D7640019AD26 /* ToDo.xcdatamodeld in Sources */,
