@@ -11,6 +11,7 @@ struct NewItem: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     @State private var description: String = ""
+    @Binding var isVisible: Bool
     
     var body: some View {
         Form {
@@ -32,6 +33,7 @@ struct NewItem: View {
             
             do {
                 try viewContext.save()
+                isVisible.toggle()
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -43,8 +45,11 @@ struct NewItem: View {
 }
 
 struct NewItem_Previews: PreviewProvider {
+    
+    @State private static var isVisible: Bool = true
+    
     static var previews: some View {
-        NewItem()
+        NewItem(isVisible: $isVisible)
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

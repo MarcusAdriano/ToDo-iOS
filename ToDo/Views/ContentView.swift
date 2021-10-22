@@ -10,6 +10,7 @@ import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @State private var isNewItemScreenVisible: Bool = false
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
@@ -25,6 +26,7 @@ struct ContentView: View {
                     } label: {
                         Text("\(item.descr ?? "NULL") \(item.timestamp!)")
                     }
+                    
                 }
                 .onDelete(perform: deleteItems)
             }
@@ -33,8 +35,8 @@ struct ContentView: View {
                     EditButton()
                 }
                 ToolbarItem {
-                    NavigationLink {
-                        NewItem()
+                    NavigationLink(isActive: $isNewItemScreenVisible) {
+                        NewItem(isVisible: $isNewItemScreenVisible)
                             .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
                     } label: {
                         Label("Add Item", systemImage: "plus")
