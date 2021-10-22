@@ -13,7 +13,10 @@ struct ContentView: View {
     @State private var isNewItemScreenVisible: Bool = false
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \ToDoItem.create_date, ascending: false)],
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \ToDoItem.create_date, ascending: false)
+        ],
+        predicate: NSPredicate(format: "is_done == NO"),
         animation: .default)
     private var items: FetchedResults<ToDoItem>
 
@@ -21,13 +24,8 @@ struct ContentView: View {
         NavigationView {
             List {
                 ForEach(items) { item in
-                    NavigationLink {
-                        Text("\(item.descr ?? "(no description)")")
-                        
-                        Spacer()
-                    } label: {
-                        Text("\(item.descr ?? "(no description)")")
-                    }
+                    
+                    ToDoRow(todo: item)
                     
                 }
                 .onDelete(perform: deleteItems)
