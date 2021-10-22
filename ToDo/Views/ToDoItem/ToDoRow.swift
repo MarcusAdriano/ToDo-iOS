@@ -26,11 +26,7 @@ struct ToDoRow: View {
             }
         })
         
-        NavigationLink {
-            
-            Text("\(todo.descr ?? "(no description)")")
-            
-        } label: {
+        HStack {
             Text("\(todo.descr ?? "(no description)")")
             
             Spacer()
