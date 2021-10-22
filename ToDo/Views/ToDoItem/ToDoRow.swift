@@ -16,7 +16,8 @@ struct ToDoRow: View {
     var body: some View {
         
         let isDone = Binding(get: { self.todo.is_done }, set: {
-            todo.is_done = $0
+            
+            update($0)
             
             do {
                 try viewContext.save()
@@ -34,6 +35,16 @@ struct ToDoRow: View {
             Toggle(isOn: isDone) {
                 Text("")
             }
+        }
+    }
+    
+    private func update(_ isDone: Bool) {
+        todo.is_done = true
+        
+        if (isDone) {
+            todo.done_date = Date()
+        } else {
+            todo.done_date = nil
         }
     }
 }
