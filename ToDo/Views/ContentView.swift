@@ -13,18 +13,20 @@ struct ContentView: View {
     @State private var isNewItemScreenVisible: Bool = false
 
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(keyPath: \ToDoItem.create_date, ascending: false)],
         animation: .default)
-    private var items: FetchedResults<Item>
+    private var items: FetchedResults<ToDoItem>
 
     var body: some View {
         NavigationView {
             List {
                 ForEach(items) { item in
                     NavigationLink {
-                        Text("\(item.descr ?? "NULL") at \(item.timestamp!, formatter: itemFormatter)")
+                        Text("\(item.descr ?? "(no description)")")
+                        
+                        Spacer()
                     } label: {
-                        Text("\(item.descr ?? "NULL") \(item.timestamp!)")
+                        Text("\(item.descr ?? "(no description)")")
                     }
                     
                 }

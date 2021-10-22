@@ -27,9 +27,11 @@ struct NewItem: View {
     
     private func addItem() {
         withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+            let newItem = ToDoItem(context: viewContext)
+            newItem.create_date = Date()
             newItem.descr = description
+            newItem.is_done = false
+            newItem.id = UUID()
             
             do {
                 try viewContext.save()
