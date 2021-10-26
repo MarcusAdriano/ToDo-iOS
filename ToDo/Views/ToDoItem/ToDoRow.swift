@@ -9,42 +9,22 @@ import SwiftUI
 
 struct ToDoRow: View {
     
-    var todo: ToDoItem
-    
-    @Environment(\.managedObjectContext) private var viewContext
+    var todo: Todo
     
     var body: some View {
         
-        let isDone = Binding(get: { self.todo.is_done }, set: {
-            
-            update($0)
-            
-            do {
-                try viewContext.save()
-            } catch {
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+        let isDone = Binding<Bool>(get: { self.todo.isDone }, set: { _ in
+            // TODO: Implement logic when is done is tapped!
         })
         
         HStack {
-            Text("\(todo.descr ?? "(no description)")")
+            Text(todo.description)
             
             Spacer()
             
             Toggle(isOn: isDone) {
                 Text("")
             }
-        }
-    }
-    
-    private func update(_ isDone: Bool) {
-        todo.is_done = true
-        
-        if (isDone) {
-            todo.done_date = Date()
-        } else {
-            todo.done_date = nil
         }
     }
 }

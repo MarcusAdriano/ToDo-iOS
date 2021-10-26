@@ -11,7 +11,7 @@ import CoreData
 
 class TodoCoreDataRepository: TodoRepository {
     
-    private let entityName = "ToDo"
+    private let entityName = "ToDoItem"
     
     func fetchAll() -> Future<[Todo], Never> {
         return Future { promise in

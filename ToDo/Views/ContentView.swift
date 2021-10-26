@@ -9,31 +9,24 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
+    @StateObject var todoViewModel = TodoViewModel(TodoCoreDataRepository())
+    
+    @State private var showOnlyUndone: Bool = true
     @State private var isNewItemScreenVisible: Bool = false
-
-    @FetchRequest(
-        sortDescriptors: [
-            NSSortDescriptor(keyPath: \ToDoItem.create_date, ascending: false)
-        ],
-        predicate: NSPredicate(format: "is_done == NO"),
-        animation: .default)
-    private var items: FetchedResults<ToDoItem>
 
     var body: some View {
         NavigationView {
             List {
-                ForEach(items) { item in
+                ForEach(todos()) { item in
                     
                     ToDoRow(todo: item)
                     
                 }
-                .onDelete(perform: deleteItems)
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
+//                ToolbarItem(placement: .navigationBarTrailing) {
+//                    EditButton()
+//                }
                 ToolbarItem {
                     NavigationLink(isActive: $isNewItemScreenVisible) {
                         NewItem(isVisible: $isNewItemScreenVisible)
@@ -44,34 +37,13 @@ struct ContentView: View {
                 }
             }
             Text("Select an item")
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }.environmentObject(todoViewModel)
+            .onAppear {
+                todoViewModel.fetchAll()
             }
-        }
     }
-}
-
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    
+    private func todos() -> [Todo] {
+        todoViewModel.todos.filter( { $0.isDone != self.showOnlyUndone } )
     }
 }
