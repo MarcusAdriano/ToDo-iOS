@@ -18,6 +18,7 @@
 		2CC92B7B2727871D00FD7BA6 /* TodoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC92B7A2727871D00FD7BA6 /* TodoRepository.swift */; };
 		2CC92B7E2727877600FD7BA6 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC92B7D2727877600FD7BA6 /* Todo.swift */; };
 		2CC92B802727880000FD7BA6 /* TodoCoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC92B7F2727880000FD7BA6 /* TodoCoreDataRepository.swift */; };
+		2CC92B8227278A3200FD7BA6 /* Todo+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC92B8127278A3200FD7BA6 /* Todo+CoreData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		2CC92B7A2727871D00FD7BA6 /* TodoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRepository.swift; sourceTree = "<group>"; };
 		2CC92B7D2727877600FD7BA6 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		2CC92B7F2727880000FD7BA6 /* TodoCoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCoreDataRepository.swift; sourceTree = "<group>"; };
+		2CC92B8127278A3200FD7BA6 /* Todo+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Todo+CoreData.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				2CC92B7F2727880000FD7BA6 /* TodoCoreDataRepository.swift */,
+				2CC92B8127278A3200FD7BA6 /* Todo+CoreData.swift */,
 			);
 			path = TodoCoreDataRepository;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CC92B8227278A3200FD7BA6 /* Todo+CoreData.swift in Sources */,
 				2C13F76C272242B20019AD26 /* ToDoRow.swift in Sources */,
 				2C13F75B2720D7640019AD26 /* Persistence.swift in Sources */,
 				2C13F7692720DC250019AD26 /* NewItem.swift in Sources */,
