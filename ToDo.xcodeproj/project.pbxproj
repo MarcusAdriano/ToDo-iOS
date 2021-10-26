@@ -15,6 +15,9 @@
 		2C13F75E2720D7640019AD26 /* ToDo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C13F75C2720D7640019AD26 /* ToDo.xcdatamodeld */; };
 		2C13F7692720DC250019AD26 /* NewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C13F7682720DC250019AD26 /* NewItem.swift */; };
 		2C13F76C272242B20019AD26 /* ToDoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C13F76B272242B20019AD26 /* ToDoRow.swift */; };
+		2CC92B7B2727871D00FD7BA6 /* TodoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC92B7A2727871D00FD7BA6 /* TodoRepository.swift */; };
+		2CC92B7E2727877600FD7BA6 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC92B7D2727877600FD7BA6 /* Todo.swift */; };
+		2CC92B802727880000FD7BA6 /* TodoCoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC92B7F2727880000FD7BA6 /* TodoCoreDataRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +30,9 @@
 		2C13F75D2720D7640019AD26 /* ToDo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDo.xcdatamodel; sourceTree = "<group>"; };
 		2C13F7682720DC250019AD26 /* NewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewItem.swift; sourceTree = "<group>"; };
 		2C13F76B272242B20019AD26 /* ToDoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoRow.swift; sourceTree = "<group>"; };
+		2CC92B7A2727871D00FD7BA6 /* TodoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRepository.swift; sourceTree = "<group>"; };
+		2CC92B7D2727877600FD7BA6 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
+		2CC92B7F2727880000FD7BA6 /* TodoCoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCoreDataRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +65,8 @@
 		2C13F7502720D75E0019AD26 /* ToDo */ = {
 			isa = PBXGroup;
 			children = (
+				2CC92B7C2727874B00FD7BA6 /* Model */,
+				2CC92B78272786EE00FD7BA6 /* Repositories */,
 				2C13F7662720DBD40019AD26 /* Store */,
 				2C13F7642720DBAA0019AD26 /* Views */,
 				2C13F7512720D75E0019AD26 /* ToDoApp.swift */,
@@ -109,6 +117,31 @@
 				2C13F76B272242B20019AD26 /* ToDoRow.swift */,
 			);
 			path = ToDoItem;
+			sourceTree = "<group>";
+		};
+		2CC92B78272786EE00FD7BA6 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				2CC92B792727870A00FD7BA6 /* TodoCoreDataRepository */,
+				2CC92B7A2727871D00FD7BA6 /* TodoRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		2CC92B792727870A00FD7BA6 /* TodoCoreDataRepository */ = {
+			isa = PBXGroup;
+			children = (
+				2CC92B7F2727880000FD7BA6 /* TodoCoreDataRepository.swift */,
+			);
+			path = TodoCoreDataRepository;
+			sourceTree = "<group>";
+		};
+		2CC92B7C2727874B00FD7BA6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2CC92B7D2727877600FD7BA6 /* Todo.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,6 +217,9 @@
 				2C13F76C272242B20019AD26 /* ToDoRow.swift in Sources */,
 				2C13F75B2720D7640019AD26 /* Persistence.swift in Sources */,
 				2C13F7692720DC250019AD26 /* NewItem.swift in Sources */,
+				2CC92B802727880000FD7BA6 /* TodoCoreDataRepository.swift in Sources */,
+				2CC92B7E2727877600FD7BA6 /* Todo.swift in Sources */,
+				2CC92B7B2727871D00FD7BA6 /* TodoRepository.swift in Sources */,
 				2C13F7542720D75E0019AD26 /* ContentView.swift in Sources */,
 				2C13F7522720D75E0019AD26 /* ToDoApp.swift in Sources */,
 				2C13F75E2720D7640019AD26 /* ToDo.xcdatamodeld in Sources */,
