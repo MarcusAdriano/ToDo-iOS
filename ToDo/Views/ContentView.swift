@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @StateObject var todoViewModel = TodoViewModel(TodoCoreDataRepository())
+    @StateObject var todoViewModel = TodoViewModel(todoRepo: TodoCoreDataRepository())
     
     @State private var showOnlyUndone: Bool = true
     @State private var isNewItemScreenVisible: Bool = false

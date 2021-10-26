@@ -12,6 +12,10 @@ class TodoViewModel: ObservableObject {
     
     private var repository: TodoRepository
     
+    init(todoRepo repo: TodoRepository) {
+        self.repository = repo
+    }
+    
     private var cancellables = Set<AnyCancellable>()
     
     init(_ repository: TodoRepository) {
