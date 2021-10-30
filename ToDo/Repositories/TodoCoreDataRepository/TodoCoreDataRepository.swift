@@ -13,6 +13,26 @@ class TodoCoreDataRepository: TodoRepository {
     
     private let entityName = "ToDoItem"
     
+    func save(todo: Todo) -> Future<Todo, Never> {
+        return Future { promise in
+            let viewContext = PersistenceController.shared.container.viewContext
+            let todoEntity = NSEntityDescription.entity(forEntityName: self.entityName, in: viewContext)!
+            
+            let todoItem = ToDoItem(entity: todoEntity, insertInto: viewContext)
+            todoItem.descr = todo.description
+            todoItem.is_done = false
+            todoItem.create_date = todo.createDate
+            todoItem.id = todo.id
+            
+            do {
+                try viewContext.save()
+                promise(.success(todo))
+            } catch let error as NSError {
+                fatalError("\(error)")
+            }
+        }
+    }
+    
     func fetchAll() -> Future<[Todo], Never> {
         return Future { promise in
             let request = NSFetchRequest<NSManagedObject>(entityName: self.entityName)

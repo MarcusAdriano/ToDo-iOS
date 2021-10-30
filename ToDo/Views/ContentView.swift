@@ -9,10 +9,8 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+   
     @StateObject var todoViewModel = TodoViewModel(todoRepo: TodoCoreDataRepository())
-    
-    @State private var showOnlyUndone: Bool = true
-    @State private var isNewItemScreenVisible: Bool = false
 
     var body: some View {
         NavigationView {
@@ -24,26 +22,31 @@ struct ContentView: View {
                 }
             }
             .toolbar {
-//                ToolbarItem(placement: .navigationBarTrailing) {
-//                    EditButton()
-//                }
-                ToolbarItem {
-                    NavigationLink(isActive: $isNewItemScreenVisible) {
-                        NewItem(isVisible: $isNewItemScreenVisible)
-                            .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
-                    } label: {
-                        Label("Add Item", systemImage: "plus")
+                ToolbarItem(placement: .bottomBar) {
+                    EditButton()
+                }
+                ToolbarItem(placement: .bottomBar) {
+                    HStack {
+                        Button {
+                            todoViewModel.showCreateNewItem()
+                        } label: {
+                            HStack {
+                                Image(systemName: "plus.app.fill")
+                                Text("New item")
+                            }
+                        }
                     }
                 }
             }
-            Text("Select an item")
+        }.onAppear {
+            todoViewModel.fetchAll()
+        }.sheet(isPresented: $todoViewModel.isShowCreateNewItem) {
+            NewItem()
         }.environmentObject(todoViewModel)
-            .onAppear {
-                todoViewModel.fetchAll()
-            }
+        .navigationTitle("Todo")
     }
     
     private func todos() -> [Todo] {
-        todoViewModel.todos.filter( { $0.isDone != self.showOnlyUndone } )
+        todoViewModel.todos.filter( { $0.isDone != todoViewModel.isShowOnlyUndone } )
     }
 }

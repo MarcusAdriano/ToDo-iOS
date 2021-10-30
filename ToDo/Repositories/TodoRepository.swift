@@ -11,5 +11,6 @@ import Combine
 protocol TodoRepository {
     
     func fetchAll() -> Future<[Todo], Never>
+    func save(todo: Todo) -> Future<Todo, Never>
     
 }
