@@ -32,9 +32,10 @@ struct ContentView: View {
                     
                 }
                 .onDelete { indexSet in
+                    // TODO: Implement on delete operation
                     print(indexSet)
                 }
-            }
+            }.listStyle(PlainListStyle())
             .navigationTitle("Todo")
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
