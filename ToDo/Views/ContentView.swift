@@ -12,6 +12,17 @@ struct ContentView: View {
    
     @StateObject var todoViewModel = TodoViewModel(todoRepo: TodoCoreDataRepository())
 
+    fileprivate func CreateButton() -> Button<HStack<TupleView<(Image, Text)>>> {
+        return Button {
+            todoViewModel.showCreateNewItem()
+        } label: {
+            HStack {
+                Image(systemName: "plus.app.fill")
+                Text("New item")
+            }
+        }
+    }
+    
     var body: some View {
         NavigationView {
             List {
@@ -30,16 +41,7 @@ struct ContentView: View {
                     EditButton()
                 }
                 ToolbarItem(placement: .bottomBar) {
-                    HStack {
-                        Button {
-                            todoViewModel.showCreateNewItem()
-                        } label: {
-                            HStack {
-                                Image(systemName: "plus.app.fill")
-                                Text("New item")
-                            }
-                        }
-                    }
+                    CreateButton()
                 }
             }
         }.onAppear {
