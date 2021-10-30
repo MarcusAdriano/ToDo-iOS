@@ -20,7 +20,11 @@ struct ContentView: View {
                     ToDoRow(todo: item)
                     
                 }
+                .onDelete { indexSet in
+                    print(indexSet)
+                }
             }
+            .navigationTitle("Todo")
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
                     EditButton()
@@ -43,7 +47,6 @@ struct ContentView: View {
         }.sheet(isPresented: $todoViewModel.isShowCreateNewItem) {
             NewItem()
         }.environmentObject(todoViewModel)
-        .navigationTitle("Todo")
     }
     
     private func todos() -> [Todo] {
