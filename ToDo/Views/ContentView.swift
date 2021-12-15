@@ -26,23 +26,23 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(todos()) { item in
+                ForEach(getTodos()) { item in
                     
-                    ToDoRow(todo: item)
-                    
-                }
-                .onDelete { indexSet in
-                    // TODO: Implement on delete operation
-                    print(indexSet)
-                }
-            }.listStyle(PlainListStyle())
-            .navigationTitle("Todo")
+                    ToDoRow(onDelete: { todo in
+                        todoViewModel.delete(todo)
+                    }, onComplete: { todo in
+                        todoViewModel.markAsDone(todo)
+                    }, todo: item)
+                }                
+            }
+            .listStyle(PlainListStyle())
+            .navigationTitle("My TODOs")
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
-                    EditButton()
+                    CreateButton()
                 }
                 ToolbarItem(placement: .bottomBar) {
-                    CreateButton()
+                    Spacer()
                 }
             }
         }.onAppear {
@@ -52,7 +52,10 @@ struct ContentView: View {
         }.environmentObject(todoViewModel)
     }
     
-    private func todos() -> [Todo] {
-        todoViewModel.todos.filter( { $0.isDone != todoViewModel.isShowOnlyUndone } )
+    private func getTodos() -> [Todo] {
+        todoViewModel.todos.filter( {
+                $0.isDone != todoViewModel.isShowOnlyUndone
+            }
+        )
     }
 }

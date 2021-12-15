@@ -12,5 +12,6 @@ protocol TodoRepository {
     
     func fetchAll() -> Future<[Todo], Never>
     func save(todo: Todo) -> Future<Todo, Never>
+    func delete(todo: Todo) -> Future<Void, Never>
     
 }

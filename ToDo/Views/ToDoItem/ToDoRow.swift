@@ -9,22 +9,35 @@ import SwiftUI
 
 struct ToDoRow: View {
     
+    var onDelete: (_ todo: Todo) -> Void
+    var onComplete: (_ todo: Todo) -> Void
     var todo: Todo
     
     var body: some View {
-        
-        let isDone = Binding<Bool>(get: { self.todo.isDone }, set: { _ in
-            // TODO: Implement logic when is done is tapped!
-        })
-        
-        HStack {
-            Text(todo.description)
-            
-            Spacer()
-            
-            Toggle(isOn: isDone) {
-                Text("")
+        if #available(iOS 15.0, *) {
+            HStack {
+                Text(todo.description)
             }
+            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                Button {
+                    onComplete(todo)
+                } label: {
+                    Label("Complete", systemImage: "checkmark")
+                }
+                .tint(.green)
+            }
+            
+            .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                Button(role: .destructive) {
+                    onDelete(todo)
+                } label: {
+                    Label("Delete", systemImage: "trash")
+                }
+                .tint(.red)
+            }
+        } else {
+            Text("iOS < 15")
         }
     }
 }
+

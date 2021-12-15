@@ -18,17 +18,12 @@ class TodoCoreDataRepository: TodoRepository {
             let viewContext = PersistenceController.shared.container.viewContext
             let todoEntity = NSEntityDescription.entity(forEntityName: self.entityName, in: viewContext)!
             
-            let todoItem = ToDoItem(entity: todoEntity, insertInto: viewContext)
-            todoItem.descr = todo.description
-            todoItem.is_done = false
-            todoItem.create_date = todo.createDate
-            todoItem.id = todo.id
+            let exists = self.findById(todo.id)
             
-            do {
-                try viewContext.save()
-                promise(.success(todo))
-            } catch let error as NSError {
-                fatalError("\(error)")
+            if (exists != nil) {
+                self.update(exists!, todo, todoEntity, viewContext, promise)
+            } else {
+                self.create(todo, todoEntity, viewContext, promise)
             }
         }
     }
@@ -46,6 +41,71 @@ class TodoCoreDataRepository: TodoRepository {
             } catch let error as NSError {
                 debugPrint(error)
             }
+        }
+    }
+    
+    func delete(todo: Todo) -> Future<Void, Never> {
+        return Future { promise in
+            let viewContext = PersistenceController.shared.container.viewContext
+            let todoToDelete = self.findById(todo.id)
+            
+            if (todoToDelete == nil) {
+                promise(.success(()))
+            } else {
+                viewContext.delete(todoToDelete!)
+                do {
+                    try viewContext.save()
+                } catch {
+                    fatalError("\(error)")
+                }
+            }
+        }
+    }
+    
+    fileprivate func update(_ todo: ToDoItem, _ newValue: Todo, _ todoEntity: NSEntityDescription, _ viewContext: NSManagedObjectContext, _ promise: (Result<Todo, Never>) -> Void) {
+        
+        todo.setValue(newValue.doneDate, forKey: "done_date")
+        todo.setValue(newValue.isDone, forKey: "is_done")
+        todo.setValue(newValue.description, forKey: "descr")
+        
+        do {
+            try viewContext.save()
+            promise(.success(newValue))
+        } catch {
+            fatalError("\(error)")
+        }
+    }
+    
+    fileprivate func create(_ todo: Todo, _ todoEntity: NSEntityDescription, _ viewContext: NSManagedObjectContext, _ promise: (Result<Todo, Never>) -> Void) {
+        
+        let todoItem = ToDoItem(entity: todoEntity, insertInto: viewContext)
+        todoItem.descr = todo.description
+        todoItem.is_done = false
+        todoItem.create_date = todo.createDate
+        todoItem.id = todo.id
+        
+        do {
+            try viewContext.save()
+            promise(.success(todo))
+        } catch let error as NSError {
+            fatalError("\(error)")
+        }
+    }
+    
+    fileprivate func findById(_ id: UUID) -> ToDoItem? {
+        let viewContext = PersistenceController.shared.container.viewContext
+        let request = NSFetchRequest<NSManagedObject>(entityName: self.entityName)
+        request.predicate = NSPredicate(format: "id = %@", id.uuidString)
+        
+        do {
+            let result = try viewContext.fetch(request)
+            if (result.count != 1) {
+                return nil
+            }
+            
+            return result[0] as? ToDoItem
+        } catch {
+            return nil
         }
     }
     

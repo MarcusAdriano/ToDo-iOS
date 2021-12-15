@@ -22,6 +22,20 @@ class TodoViewModel: ObservableObject {
     }
     
     // MARK: - Intents
+    func markAsDone(_ item: Todo) {
+        let newItem = item.markAsDone()
+        repository.save(todo: newItem)
+            .sink { _ in
+                self.fetchAll()
+            }.store(in: &cancellables)
+    }
+    
+    func delete(_ item: Todo) {
+        repository.delete(todo: item)
+            .sink { _ in
+                self.fetchAll()
+            }.store(in: &cancellables)
+    }
     
     func fetchAll() {
         repository.fetchAll().sink { todos in
@@ -43,7 +57,7 @@ class TodoViewModel: ObservableObject {
     
     func save(_ description: String) {
         let todo = Todo(description: description, createDate: Date(), id: UUID())
-        repository.save(todo: todo).sink { _todos in
+        repository.save(todo: todo).sink { _ in
             self.closeCreateNewItem()
         }.store(in: &cancellables)
     }

@@ -15,4 +15,7 @@ struct Todo: Codable, Identifiable {
     var doneDate: Date?
     var id: UUID
     
+    func markAsDone() -> Todo {
+        return Todo(description: description, isDone: true, createDate: createDate, doneDate: Date(), id: id)
+    }
 }
