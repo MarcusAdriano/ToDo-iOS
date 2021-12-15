@@ -33,7 +33,7 @@ class TodoViewModel: ObservableObject {
     func delete(_ item: Todo) {
         repository.delete(todo: item)
             .sink { _ in
-                self.fetchAll()
+                self.todos.remove(todo: item)
             }.store(in: &cancellables)
     }
     
@@ -60,6 +60,17 @@ class TodoViewModel: ObservableObject {
         repository.save(todo: todo).sink { _ in
             self.closeCreateNewItem()
         }.store(in: &cancellables)
+    }
+    
+}
+
+extension Array where Element == Todo {
+    
+    mutating func remove(todo: Todo) -> Void {
+        guard let index = firstIndex(where: { e in
+            e.id == todo.id
+        }) else { return }
+        self.remove(at: index)
     }
     
 }
